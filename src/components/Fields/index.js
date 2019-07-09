@@ -6,14 +6,18 @@ export function customInput(props) {
   const {label, input, type, meta} = props;
 
   const getValidityClassName = meta => {
-    if (meta.active) {
+    const {active, touched, invalid, valid, asyncValidating } = meta;
+    if (active) {
       return;
     }
-    if (meta.touched && meta.invalid) {
+    if (touched && invalid) {
       return 'invalid';
     }
-    if (meta.touched && meta.valid) {
+    if (touched && valid) {
       return 'valid';
+    }
+    if (asyncValidating) {
+      return 'async-validating';
     }
   };
 
@@ -51,3 +55,4 @@ export function customSelect(props) {
     </div>
   );
 };
+
