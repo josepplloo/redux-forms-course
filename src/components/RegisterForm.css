@@ -136,3 +136,12 @@ button[type='submit'] {
     border-color: grey;
   }
 }
+
+.field-array-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.field-array-item button {
+  align-self: start;
+}

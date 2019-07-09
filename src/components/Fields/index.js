@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactJson from 'react-json-view';
+import { Field } from "redux-form";
+
 import cx from 'classnames';
 
 export function customInput(props) {
@@ -56,3 +58,26 @@ export function customSelect(props) {
   );
 };
 
+export function discounts({ fields }) { 
+  return (
+  <div className="custom-field-array-container">
+    {fields.map((code, index) => (
+      <div key={index} className="field-array-item">
+        <Field
+          name={code}
+          type="text"
+          component={customInput}
+          label={`Discount Code #${index + 1}`}
+          autoFocus
+        />
+        <button type="button" onClick={() => fields.remove(index)}>
+          &times;
+        </button>
+      </div>
+    ))}
+    <button type="button" onClick={() => fields.push()}>
+      Add {!fields.length ? 'Discount Code(s)' : 'Another'}
+    </button>
+  </div>
+);
+    }

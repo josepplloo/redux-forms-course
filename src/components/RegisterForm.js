@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, FieldArray } from "redux-form";
+import capitalize from 'capitalize';
 
-import { customInput, customSelect } from "./Fields";
+
+import { customInput, customSelect, discounts } from "./Fields";
 import { required, minLength, maxLength, matchesPassword, asyncValidate } from "./Validation";
 
 import "./RegisterForm.css";
@@ -18,6 +20,8 @@ class RegisterForm extends Component {
           type="text"
           label="First Name"
           validate={[required]}
+          normalize={capitalize}
+
         />
         <Field
           name="surname"
@@ -25,6 +29,8 @@ class RegisterForm extends Component {
           type="text"
           label="Surname"
           validate={[required]}
+          normalize={capitalize}
+
         />
         <Field
           name="username"
@@ -58,6 +64,8 @@ class RegisterForm extends Component {
           type="checkbox"
           label="Sign up to Newsletter?"
         />
+        <FieldArray name="discountCodes" component={discounts} />
+
         <button type="submit">Submit</button>
       </form>
     );
