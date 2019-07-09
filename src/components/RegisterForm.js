@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
+import React, { Component } from "react";
+import { Field, reduxForm } from "redux-form";
 
-import { customInput, customSelect } from './Fields';
-import { required, minLength, maxLength } from './Validation';
+import { customInput, customSelect } from "./Fields";
+import { required, minLength, maxLength, matchesPassword } from "./Validation";
 
-import './RegisterForm.css';
+import "./RegisterForm.css";
 
 class RegisterForm extends Component {
- 
   render() {
     const { handleSubmit } = this.props;
 
@@ -28,12 +27,26 @@ class RegisterForm extends Component {
           validate={[required]}
         />
         <Field
-        name="username"
-        component={customInput}
-        type="text"
-        label="Username"
-        validate={[required, minLength, maxLength ]}
-      />
+          name="username"
+          component={customInput}
+          type="text"
+          label="Username"
+          validate={[required, minLength, maxLength]}
+        />
+        <Field
+          name="password"
+          component={customInput}
+          type="password"
+          label="Password"
+          validate={[required]}
+        />
+        <Field
+          name="confirmPassword"
+          component={customInput}
+          type="password"
+          label="Confirm Password"
+          validate={[required, matchesPassword]}
+        />
         <Field
           name="preference"
           component={customSelect}
@@ -47,12 +60,12 @@ class RegisterForm extends Component {
         />
         <button type="submit">Submit</button>
       </form>
-    )
+    );
   }
 }
 
 RegisterForm = reduxForm({
-  form: 'register'
+  form: "register"
 })(RegisterForm);
 
 export default RegisterForm;
